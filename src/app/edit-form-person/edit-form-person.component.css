@@ -1,0 +1,64 @@
+.toolbar{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px !important;
+    height: 50px;
+}
+
+ .form{
+    padding: 20px !important;
+    min-height: 460px;
+}
+.inputstyle{
+        width: 100%;
+}
+.phone{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.email{
+    width:50%; 
+    margin-left: 10px;
+}
+.add{
+    margin-left: 20px;
+}
+
+.close:hover{
+    color: red;
+}
+.toolbarNav{
+    display: flex;
+    justify-content:flex-end;
+
+}
+.spaceBetween{
+    margin-left: 5px;
+}
+
+.closeIcon{
+    margin-right:10px ;
+}
+
+.buyersType{
+    width: 50%;
+}
+.personName{
+    display:flex; 
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.personAddress{
+    display:flex; 
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.checkBox{
+    display:flex; 
+    flex-direction:row; 
+    justify-content:space-between;
+}
+

@@ -1,0 +1,110 @@
+<mat-card class="card">
+    <mat-toolbar>
+        <button mat-icon-button class="account" aria-label="Example icon-button with menu icon">
+            <mat-icon style="font-size: 25px;">account_circle</mat-icon>
+        </button>
+        <span>
+            <p class="name">{{buyer?.buyer?.person?.firstName}} {{buyer?.buyer.person.middleName}}
+                {{buyer?.buyer.person.lastName}}</p>
+            <p class="person">{{buyer.buyer.applicantCase}}</p>
+        </span>
+        <span class="example-spacer"></span>
+        <button mat-icon-button class="error_outline" style="color:red ;">
+            <mat-icon style="font-size: 25px;">error_outline</mat-icon>
+        </button>
+        <button mat-button class="editButton" aria-label="Example button">
+            <span style="font-size:18px" (click)="openDialogPerson(id)"> Edit</span>
+        </button>
+    </mat-toolbar>
+    <mat-card-content style="display:flex; flex-direction: row; justify-content: space-between;">
+        <div style="padding:10px ;margin: 0px 6px 6px">
+            <p style="padding: 0px !important;">Address<mat-icon
+                    style="height: 15px; width: 15px; padding: 0px !important; color:blue;">edit_location</mat-icon>
+            </p>
+            <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">
+                {{this.buyer.buyer.person.address.street1}} {{this.buyer.buyer.person.address.street2}}
+                <br>{{this.buyer.buyer.person.address.city}}
+                {{this.buyer.buyer.person.address.stateCode}} {{this.buyer.buyer.person.address.zipCode}}
+            </p>
+        </div>
+        <div style="padding:10px ;margin: 0px 6px 6px">
+            <p style="padding: 0px !important;">Phone<mat-icon
+                    style="height: 15px; width: 15px; padding: 0px !important; color:blue;">phone</mat-icon>
+            </p>
+            <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{this.buyer.buyer.phone}}
+            </p>
+        </div>
+        <div style="padding:10px ;margin: 0px 6px 6px">
+            <p style="padding: 0px !important;">Email<mat-icon
+                    style="height: 15px; width: 15px; padding: 0px !important; color:blue;">email</mat-icon>
+            </p>
+            <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{this.buyer.buyer.email}}
+            </p>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+
+
+<mat-card class="card">
+    <mat-toolbar>
+        <div style="display:flex; flex-direction:row;">
+            <button mat-icon-button class="account" aria-label="Example icon-button with menu icon">
+                <mat-icon style="font-size: 25px;">directions_car</mat-icon>
+            </button>
+            <span>
+                <p class="name">Retail Vehicle</p>
+                <p class="person">{{buyer.retailVehicle.modelYear}} {{buyer.retailVehicle.modelCode}}
+                    {{buyer.retailVehicle.make}} {{buyer.retailVehicle.makeCode}}</p>
+            </span>
+        </div>
+        <div><button mat-button class="editButton" aria-label="Example button" (click)="openDialogVehicle(id)">
+                <span style="font-size:18px; margin-top: 12px;"> Edit</span>
+            </button></div>
+        <div>
+            <button mat-icon-button class="account" aria-label="Example icon-button with menu icon">
+                <mat-icon style="font-size: 25px;">directions_car</mat-icon>
+            </button>
+            <span>Trade In</span>
+        </div>
+        <div>
+            <span class="example-spacer"></span>
+                     <button mat-button class="editButton" aria-label="Example button" (click)="openDialogVehicle(id)">
+                <span style="font-size:18px" > Add</span>
+            </button>
+        </div>
+    </mat-toolbar>
+    <div style="display:flex; flex-direction: row; justify-content: space-between; margin-top: 18px;">
+        <div style="padding:10px ;">
+            <p class="person">Vin
+            </p><p style="margin: 10px;"></p>
+            <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">
+                {{buyer.retailVehicle.vin}}
+            </p>
+        </div>
+        <div style="padding:10px ;margin: 0px 6px 6px">
+            <p class="person">Stock
+            </p><p style="margin: 10px;"></p>
+            <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{buyer.retailVehicle.stockNumber}}
+            </p>
+        </div>
+        <div style="padding:10px ;margin: 0px 6px 6px">
+            <p class="person">color
+            </p><p style="margin: 10px;"></p>
+            <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{buyer.retailVehicle.majorColor}}
+            </p>
+        </div>
+        <div style="padding:10px ;margin: 0px 6px 6px">
+            <p class="person">Body Style
+            </p><p style="margin: 10px;"></p>
+            <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{buyer.retailVehicle.bodyStyle}}
+            </p>
+        </div>
+        <div style="padding:10px ;margin: 0px 6px 6px">
+            <p class="person">Gross Weight
+            </p><p style="margin: 10px;"></p>
+            <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{buyer.retailVehicle.grossWeight}}
+            </p>
+        </div>
+    </div>
+</mat-card>

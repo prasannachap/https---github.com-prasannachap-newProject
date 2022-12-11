@@ -1,0 +1,100 @@
+<mat-toolbar class="toolbar">
+    <h1 class="add">Edit Form</h1>
+    <mat-icon class="close" [mat-dialog-close]="true" ng-hover class="closeIcon">close</mat-icon>
+</mat-toolbar>
+
+
+<form class="form" [formGroup]="vehicleForm">
+    <div class="vehicle">
+        <mat-form-field appearance="fill" class="inputstyle">
+            <mat-label>Vin</mat-label>
+            <input matInput formControlName="vin">
+        </mat-form-field>
+        <p class="spaceBetween"></p>
+        <mat-form-field appearance="fill" class="inputstyle">
+            <mat-label>Stock Number</mat-label>
+            <input matInput formControlName="stockNumber" required="string">
+        </mat-form-field>
+        <p class="spaceBetween"></p>
+
+
+    </div>
+    <p class="spaceBetween"></p>
+    <div class="vehicle">
+        <mat-form-field appearance="fill" class="inputstyle">
+            <mat-label>Model</mat-label>
+            <input matInput formControlName="model" required>
+        </mat-form-field>
+        <p class="spaceBetween"></p>
+
+        <mat-form-field appearance="fill" class="inputstyle">
+            <mat-label>Model Code</mat-label>
+            <input matInput formControlName="modelCode" required>
+        </mat-form-field>
+        <p class="spaceBetween"></p>
+        <mat-form-field appearance="fill" class="inputstyle">
+            <mat-label>Model Year</mat-label>
+            <input matInput formControlName="modelYear" required>
+        </mat-form-field>
+    </div>
+    <div class="vehicle">
+        <mat-form-field appearance="fill" class="inputstyle">
+            <mat-label>Make Code</mat-label>
+            <input matInput formControlName="makeCode" required="string">
+        </mat-form-field>
+        <p class="spaceBetween"></p>
+        <mat-form-field appearance="fill" class="inputstyle">
+            <mat-label>Make</mat-label>
+            <input matInput formControlName="make" required="string">
+        </mat-form-field>
+        <p class="spaceBetween"></p>
+    </div>
+    <p class="spaceBetween"></p>
+
+    <div class="vehicle">
+        <mat-form-field appearance="fill" class="inputstyle">
+            <mat-label>Body Style Code</mat-label>
+            <input matInput formControlName="bodyStyleCode" required="string">
+        </mat-form-field>
+        <p class="spaceBetween"></p>
+        <mat-form-field appearance="fill" class="inputstyle">
+            <mat-label>Body Style</mat-label>
+            <input matInput formControlName="bodyStyle" required="string">
+        </mat-form-field>
+        <p class="spaceBetween"></p>
+    </div>
+
+
+    <mat-form-field appearance="fill" class="inputstyle">
+        <mat-label>Carrying Capacity</mat-label>
+        <input matInput formControlName="carryingCapacity" required="string">
+    </mat-form-field>
+    <p class="spaceBetween"></p>
+     <div class="vehicle">
+        <mat-form-field appearance="fill" class="inputstyle">
+            <mat-label>Major Color Code</mat-label>
+            <input matInput formControlName="majorColorCode" required>
+        </mat-form-field>
+        <p class="spaceBetween"></p>
+
+        <mat-form-field appearance="fill" class="inputstyle">
+            <mat-label>Major color</mat-label>
+            <input matInput formControlName="majorColor" required>
+        </mat-form-field>
+        <p class="spaceBetween"></p>
+        <mat-form-field appearance="fill" class="inputstyle">
+            <mat-label>Minor Color Code</mat-label>
+            <input matInput formControlName="minorColorCode" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="inputstyle">
+            <mat-label>Minor Color</mat-label>
+            <input matInput formControlName="minorColor" required>
+        </mat-form-field>
+    </div> 
+
+
+</form>
+
+<mat-toolbar class="toolbarNav">
+    <button mat-raised-button color="primary" (click)="editVehicle()">Submit</button>
+</mat-toolbar>
