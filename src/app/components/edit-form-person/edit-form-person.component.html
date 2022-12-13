@@ -19,6 +19,7 @@
     <mat-form-field appearance="fill" class="inputstyle">
         <mat-label>First Name</mat-label>
         <input matInput formControlName="firstName">
+        <!-- <div *ngIf="edit.firstName.invalid && edit.firstName.touched"> error</div> -->
     </mat-form-field><p class="spaceBetween"></p>
     <mat-form-field appearance="fill" class="inputstyle">
         <mat-label>Middle Name</mat-label>
@@ -80,7 +81,6 @@
         <mat-form-field appearance="fill" class="email">
             <mat-label>Email</mat-label>
             <input type="email" matInput formControlName="email" required>
-            
         </mat-form-field>
         <span style="color: red;"></span>
 </div>
@@ -93,5 +93,5 @@
 </form>
 
 <mat-toolbar class="toolbarNav">
-    <button  mat-raised-button color="primary" (click)="editBuyer()">Submit</button>
+    <button  mat-raised-button color="primary" (click)="editBuyer()" [disabled]="editForm.invalid">Submit</button>
 </mat-toolbar>

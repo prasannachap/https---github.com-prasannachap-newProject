@@ -2,7 +2,7 @@ import { GET_ALL_USERS_URL } from '../constant/constant';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { BuyerAbstractModel } from '../models/buyer.model';
+import { BuyerAbstractModel, RetailVehicle } from '../models/buyer.model';
 
 @Injectable()
 export class projectServices {
@@ -18,7 +18,6 @@ export class projectServices {
   };
 
   deleteBuyer = async (id: string): Promise<boolean> => {
-    
     try {
       const response = await this.httpClient
         .delete<any>(GET_ALL_USERS_URL + '/' + id)
@@ -38,11 +37,23 @@ export class projectServices {
     });
   };
 
-  editBuyer = async (id: string, data: BuyerAbstractModel): Promise<BuyerAbstractModel> => {
-    
-
+  editBuyer = async (
+    id: string,
+    data: BuyerAbstractModel
+  ): Promise<BuyerAbstractModel> => {
     const response = await this.httpClient
       .put(GET_ALL_USERS_URL + '/' + id, data)
+      .toPromise();
+    return new Promise((resolve) => {
+      resolve(response as BuyerAbstractModel | any);
+    });
+  };
+
+  addVehicle = async (
+    data: BuyerAbstractModel
+  ): Promise<BuyerAbstractModel> => {
+    const response = await this.httpClient
+      .post<BuyerAbstractModel>(GET_ALL_USERS_URL, data)
       .toPromise();
     return new Promise((resolve) => {
       resolve(response as BuyerAbstractModel | any);

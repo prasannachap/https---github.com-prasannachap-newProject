@@ -1,9 +1,3 @@
-<mat-toolbar class="toolbar">
-    <h1 class="add">Edit Form</h1>
-    <mat-icon class="close" [mat-dialog-close]="true" ng-hover class="closeIcon">close</mat-icon>
-</mat-toolbar>
-
-
 <form class="form" [formGroup]="vehicleForm">
     <div class="vehicle">
         <mat-form-field appearance="fill" class="inputstyle">
@@ -94,7 +88,3 @@
 
 
 </form>
-
-<mat-toolbar class="toolbarNav">
-    <button mat-raised-button color="primary" (click)="editVehicle()">Submit</button>
-</mat-toolbar>

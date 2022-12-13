@@ -4,6 +4,8 @@ import {
   FormGroup,
   FormControl,
   Validators,
+  EmailValidator,
+  
 } from '@angular/forms';
 import {
   MatDialog,
@@ -20,9 +22,10 @@ import {
   BuyerType,
   Person,
   RetailVehicle,
-} from '../models/buyer.model';
+} from '../../models/buyer.model';
 
-import { projectServices } from '../services/records.services';
+import { projectServices } from '../../services/records.services';
+import { firstNameValidator, middleNameValidator, lastNameValidator, emailValidator} from 'src/app/validators.editperson';
 
 @Component({
   selector: 'app-edit-form-person',
@@ -46,22 +49,22 @@ export class EditFormPersonComponent implements OnInit {
     console.log('Response Data', this.responseData);
     this.id = this.responseData.id;
     this.buyerTypeList = this.responseData.buyerType;
-    debugger;
+    ;
   }
 
   editForm = new FormGroup({
-    firstName: new FormControl('', Validators.required),
-    middleName: new FormControl(''),
-    lastName: new FormControl(''),
-    suffix: new FormControl(''),
-    street1: new FormControl(''),
-    street2: new FormControl(''),
-    city: new FormControl(''),
-    state: new FormControl(''),
-    country: new FormControl(''),
-    zipCode: new FormControl(''),
-    email: new FormControl(''),
-    phone: new FormControl(''),
+    firstName: new FormControl('', [Validators.required, firstNameValidator()]),
+    middleName: new FormControl('',  [Validators.required, middleNameValidator()] ),
+    lastName: new FormControl('',  [Validators.required, lastNameValidator()]),
+    suffix: new FormControl('',  Validators.required),
+    street1: new FormControl('',  Validators.required),
+    street2: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    state: new FormControl('', Validators.required),
+    country: new FormControl('' ,Validators.required,),
+    zipCode: new FormControl('',  Validators.required),
+    email: new FormControl('', [Validators.required, emailValidator()]),
+    phone: new FormControl('', Validators.required),
     isMilitary: new FormControl(false),
     buyerType: new FormControl(),
     isRenewalRecipient: new FormControl(false),
@@ -151,7 +154,7 @@ export class EditFormPersonComponent implements OnInit {
       buyer: buyer,
       retailVehicle: rv,
     };
-    debugger;
+    
     return updatedBuyer;
   }
 
@@ -183,5 +186,10 @@ export class EditFormPersonComponent implements OnInit {
       }
     } else {
     }
+  }
+
+  get edit()
+  {
+      return this.editForm.controls;
   }
 }

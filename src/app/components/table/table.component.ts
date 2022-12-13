@@ -1,10 +1,10 @@
 import { Component, OnInit} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Route, Router } from '@angular/router';
-import { GET_ALL_USERS_URL } from '../constant/constant';
-import { BuyerAbstractModel } from '../models/buyer.model';
-import { BuyerTableViewModel } from '../models/viewModel/buyerViewModel.model';
-import { projectServices } from '../services/records.services';
+import { GET_ALL_USERS_URL } from '../../constant/constant';
+import { BuyerAbstractModel } from '../../models/buyer.model';
+import { BuyerTableViewModel } from '../../models/viewModel/buyerViewModel.model';
+import { projectServices } from '../../services/records.services';
 
 @Component({
   selector: 'app-table',
