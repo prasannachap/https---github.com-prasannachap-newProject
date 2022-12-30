@@ -17,3 +17,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
    overflow-x: hidden !important;
    width: 800px;
 }
+
+ .green{
+    background: white;
+    color: white;
+} 
+
+.warn-snackbar{
+    background: red;
+    color: white;
+}   
+
+.mat-mdc-snack-bar-container {
+    --mat-mdc-snack-bar-button-color: #ffffff;
+    --mdc-snackbar-supporting-text-color: #ffffff;
+}
+.green {
+      --mdc-snackbar-container-color:  #43a446;
+    }
+  
+.red {
+      --mdc-snackbar-container-color: #f23a2f;
+    }
+  

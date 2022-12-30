@@ -1,110 +1,200 @@
-<mat-card class="card">
-    <mat-toolbar>
-        <button mat-icon-button class="account" aria-label="Example icon-button with menu icon">
-            <mat-icon style="font-size: 25px;">account_circle</mat-icon>
-        </button>
-        <span>
-            <p class="name">{{buyer?.buyer?.person?.firstName}} {{buyer?.buyer.person.middleName}}
-                {{buyer?.buyer.person.lastName}}</p>
-            <p class="person">{{buyer.buyer.applicantCase}}</p>
-        </span>
-        <span class="example-spacer"></span>
-        <button mat-icon-button class="error_outline" style="color:red ;">
-            <mat-icon style="font-size: 25px;">error_outline</mat-icon>
-        </button>
-        <button mat-button class="editButton" aria-label="Example button">
-            <span style="font-size:18px" (click)="openDialogPerson(id)"> Edit</span>
-        </button>
-    </mat-toolbar>
-    <mat-card-content style="display:flex; flex-direction: row; justify-content: space-between;">
-        <div style="padding:10px ;margin: 0px 6px 6px">
-            <p style="padding: 0px !important;">Address<mat-icon
-                    style="height: 15px; width: 15px; padding: 0px !important; color:blue;">edit_location</mat-icon>
-            </p>
-            <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">
-                {{this.buyer.buyer.person.address.street1}} {{this.buyer.buyer.person.address.street2}}
-                <br>{{this.buyer.buyer.person.address.city}}
-                {{this.buyer.buyer.person.address.stateCode}} {{this.buyer.buyer.person.address.zipCode}}
-            </p>
-        </div>
-        <div style="padding:10px ;margin: 0px 6px 6px">
-            <p style="padding: 0px !important;">Phone<mat-icon
-                    style="height: 15px; width: 15px; padding: 0px !important; color:blue;">phone</mat-icon>
-            </p>
-            <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{this.buyer.buyer.phone}}
-            </p>
-        </div>
-        <div style="padding:10px ;margin: 0px 6px 6px">
-            <p style="padding: 0px !important;">Email<mat-icon
-                    style="height: 15px; width: 15px; padding: 0px !important; color:blue;">email</mat-icon>
-            </p>
-            <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{this.buyer.buyer.email}}
-            </p>
-        </div>
-    </mat-card-content>
-</mat-card>
+<mat-spinner *ngIf="loading" class="loading"></mat-spinner>
 
-
-
-<mat-card class="card">
-    <mat-toolbar>
-        <div style="display:flex; flex-direction:row;">
+<div *ngIf="!loading">
+    <mat-card class="card">
+        <mat-toolbar>
             <button mat-icon-button class="account" aria-label="Example icon-button with menu icon">
-                <mat-icon style="font-size: 25px;">directions_car</mat-icon>
+                <mat-icon style="font-size: 25px;">account_circle</mat-icon>
             </button>
             <span>
-                <p class="name">Retail Vehicle</p>
-                <p class="person">{{buyer.retailVehicle.modelYear}} {{buyer.retailVehicle.modelCode}}
-                    {{buyer.retailVehicle.make}} {{buyer.retailVehicle.makeCode}}</p>
+                <p class="name">{{buyer.buyer.person.firstName}} {{buyer.buyer.person.middleName}}
+                    {{buyer.buyer.person.lastName}} </p>
+                <p class="person">{{buyer.buyer.applicantCase}}</p>
             </span>
-        </div>
-        <div><button mat-button class="editButton" aria-label="Example button" (click)="openDialogVehicle(id)">
-                <span style="font-size:18px; margin-top: 12px;"> Edit</span>
-            </button></div>
-        <div>
-            <button mat-icon-button class="account" aria-label="Example icon-button with menu icon">
-                <mat-icon style="font-size: 25px;">directions_car</mat-icon>
-            </button>
-            <span>Trade In</span>
-        </div>
-        <div>
             <span class="example-spacer"></span>
-                     <button mat-button class="editButton" aria-label="Example button" (click)="AddVehicle(id)">
-                <span style="font-size:18px" > Add</span>
+            <button mat-icon-button class="error_outline" style="color:red ;">
+                <mat-icon style="font-size: 25px;">error_outline</mat-icon>
             </button>
+            <button mat-button class="editButton" aria-label="Example button">
+                <span style="font-size:18px" (click)="openDialogPerson(id)"> Edit</span>
+            </button>
+        </mat-toolbar>
+        <mat-card-content style="display:flex; flex-direction: row; justify-content: space-between;">
+            <div style="padding:10px ;margin: 0px 6px 6px">
+                <p style="padding: 0px !important;" class="person">Address<mat-icon
+                        style="height: 15px; width: 15px; padding: 0px !important; color:blue;">edit_location</mat-icon>
+                </p>
+                <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">
+                    {{this.buyer.buyer.person.address.street1}} {{this.buyer.buyer.person.address.street2}}
+                    <br>{{this.buyer.buyer.person.address.city}}
+                    {{this.buyer.buyer.person.address.state}} {{this.buyer.buyer.person.address.zipCode}}
+                </p>
+            </div>
+            <div style="padding:10px ;margin: 0px 6px 6px">
+                <p style="padding: 0px !important;" class="person">Phone<mat-icon
+                        style="height: 15px; width: 15px; padding: 0px !important; color:blue;">phone</mat-icon>
+                </p>
+                <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{this.buyer.buyer.phone}}
+                </p>
+            </div>
+            <div style="padding:10px ;margin: 0px 6px 6px">
+                <p style="padding: 0px !important;" class="person">Email<mat-icon
+                        style="height: 15px; width: 15px; padding: 0px !important; color:blue;">email</mat-icon>
+                </p>
+                <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{this.buyer.buyer.email}}
+                </p>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+
+
+    <mat-card class="card">
+        <mat-toolbar>
+            <div style="display:flex; flex-direction:row;">
+                <button mat-icon-button class="account" aria-label="Example icon-button with menu icon">
+                    <mat-icon style="font-size: 25px;">directions_car</mat-icon>
+                </button>
+                <span>
+                    <p class="name">Retail Vehicle</p>
+                    <p class="person">{{buyer.retailVehicle.modelYear}} {{buyer.retailVehicle.modelCode}}
+                        {{buyer.retailVehicle.make}} {{buyer.retailVehicle.makeCode}}</p>
+                </span>
+            </div>
+            <div><button mat-button class="editButton" aria-label="Example button" (click)="openDialogVehicle(id)">
+                    <span style="font-size:18px; margin-top: 12px;"> Edit</span>
+                </button></div>
+            <div class="tradeIn">
+                <button mat-icon-button class="account" aria-label="Example icon-button with menu icon">
+                    <mat-icon style="font-size: 25px;">directions_car</mat-icon>
+                </button>
+                <span>Trade In</span>
+            </div>
+            <div>
+                <span class="example-spacer"></span>
+                        <button mat-button class="editButton" aria-label="Example button" (click)="AddVehicle(id)">
+                    <span style="font-size:18px" > Add</span>
+                </button>
+            </div>
+        </mat-toolbar>
+        <div style="display:flex; flex-direction: row; justify-content: space-between; margin-top: 18px;">
+            <div style="padding:10px ;">
+                <p class="person">Vin
+                </p><p style="margin: 10px;"></p>
+                <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">
+                    {{buyer.retailVehicle.vin}}
+                </p>
+            </div>
+            <div style="padding:10px ;margin: 0px 6px 6px">
+                <p class="person">Stock
+                </p><p style="margin: 10px;"></p>
+                <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{buyer.retailVehicle.stockNumber}}
+                </p>
+            </div>
+            <div style="padding:10px ;margin: 0px 6px 6px">
+                <p class="person">color
+                </p><p style="margin: 10px;"></p>
+                <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{buyer.retailVehicle.majorColor}}
+                </p>
+            </div>
+            <div style="padding:10px ;margin: 0px 6px 6px">
+                <p class="person">Body Style
+                </p><p style="margin: 10px;"></p>
+                <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{buyer.retailVehicle.bodyStyle}}
+                </p>
+            </div>
+            <div style="padding:10px ;margin: 0px 6px 6px">
+                <p class="person">Gross Weight
+                </p><p style="margin: 10px;"></p>
+                <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{buyer.retailVehicle.grossWeight}}
+                </p>
+            </div>
         </div>
-    </mat-toolbar>
-    <div style="display:flex; flex-direction: row; justify-content: space-between; margin-top: 18px;">
-        <div style="padding:10px ;">
-            <p class="person">Vin
-            </p><p style="margin: 10px;"></p>
-            <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">
-                {{buyer.retailVehicle.vin}}
-            </p>
-        </div>
-        <div style="padding:10px ;margin: 0px 6px 6px">
-            <p class="person">Stock
-            </p><p style="margin: 10px;"></p>
-            <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{buyer.retailVehicle.stockNumber}}
-            </p>
-        </div>
-        <div style="padding:10px ;margin: 0px 6px 6px">
-            <p class="person">color
-            </p><p style="margin: 10px;"></p>
-            <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{buyer.retailVehicle.majorColor}}
-            </p>
-        </div>
-        <div style="padding:10px ;margin: 0px 6px 6px">
-            <p class="person">Body Style
-            </p><p style="margin: 10px;"></p>
-            <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{buyer.retailVehicle.bodyStyle}}
-            </p>
-        </div>
-        <div style="padding:10px ;margin: 0px 6px 6px">
-            <p class="person">Gross Weight
-            </p><p style="margin: 10px;"></p>
-            <p class="name" style=" padding: 0px !important;     margin: 1px 0px 5px;">{{buyer.retailVehicle.grossWeight}}
-            </p>
-        </div>
-    </div>
-</mat-card>
+    </mat-card>
+
+
+    <mat-card class="card" style="height: 300px !important;">
+        <mat-toolbar>
+            <button mat-icon-button class="account" aria-label="Example icon-button with menu icon">
+            <mat-icon style="font-size: 25px;">attach_money</mat-icon>
+        </button>
+            <div>
+                Sales and Taxes
+            </div>
+            <span class="example-spacer"></span>
+            
+            <button mat-button class="editButton" aria-label="Example button">
+                <span style="font-size:18px" (click)="openDialogSales(id)"> Edit</span>
+            </button>
+        </mat-toolbar>
+        <p class="spaceBetween"></p>
+        <mat-card-content style="display: flex; flex-direction: row;">
+            <div class="sales">
+                <div>
+                    <div>Sales</div>
+                <div  class="name"> {{buyer.soldFinance.finalFinancingAmounts.purchasePrice}}</div>
+                </div>
+                <div><p class="spaceBetween"></p>
+                    <div>Plate And Sticker</div>
+                <div class="name"> {{buyer.soldFinance.finalFinancingAmounts.fees.plateAndSticker}} </div>
+                </div>
+                <div><p class="spaceBetween"></p>
+                    <div>County</div>
+                <div class="name"> {{buyer.soldFinance.finalFinancingAmounts.fees.county}}</div>
+                </div>
+                
+                
+            </div><p class="spaceBetween1"></p> <p class="spaceBetween"></p>
+            <div class="sales">
+                <div>
+                    <div>Sale price less Rebate</div>
+                <div  class="name"><span> {{salePriceLessRebate}}({{dealerAndManufactureRebate}} Rebate)</span></div>
+                </div>
+                <div><p class="spaceBetween"></p>
+                    <div>Title Application</div>
+                <div class="name"> {{buyer.soldFinance.finalFinancingAmounts.fees.titleApplication}} </div>
+                </div>
+                <div><p class="spaceBetween"></p>
+                    <div>P & H</div>
+                <div class="name"> {{buyer.soldFinance.finalFinancingAmounts.fees.processingAndHandling}}</div>
+                </div>
+                
+                
+            </div><p class="spaceBetween1"></p> <p class="spaceBetween"></p>
+            <div class="sales">
+                <div>
+                    <div>Total Trade In Allowance</div>
+                <div  class="name"> {{buyer.soldFinance.finalFinancingAmounts.totalTradeInAllowance}}</div>
+                </div>
+                <div><p class="spaceBetween"></p>
+                    <div>eTag</div>
+                <div class="name"> {{buyer.soldFinance.finalFinancingAmounts.fees.eTag}} </div>
+                </div>
+                <div><p class="spaceBetween"></p>
+                    <div>Inspection</div>
+                <div class="name"> {{buyer.soldFinance.finalFinancingAmounts.fees.county}}</div>
+                </div>
+                
+                
+            </div><p class="spaceBetween1"></p> <p class="spaceBetween"></p>
+
+            <div class="sales">
+                <div>
+                    <div>Sales Tax</div>
+                <strong style="color: black;"> {{0.13 * buyer.soldFinance.finalFinancingAmounts.purchasePrice}}</strong>
+                </div>
+                <div><p class="spaceBetween"></p>
+                    <div>Dmv Fees </div>
+                <strong style="color: black;"> {{buyer.soldFinance.finalFinancingAmounts.fees.plateAndSticker}} </strong>
+                </div>
+                <div><p class="spaceBetween"></p>
+                    <div>Total Tax and Fees</div>
+                <strong style="color: black;"> {{buyer.soldFinance.finalFinancingAmounts.fees.county}}</strong>
+                </div>
+                
+                
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+</div>

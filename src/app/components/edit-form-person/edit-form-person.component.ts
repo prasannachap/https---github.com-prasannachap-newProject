@@ -1,19 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {
-  FormBuilder,
   FormGroup,
   FormControl,
   Validators,
-  EmailValidator,
   
 } from '@angular/forms';
 import {
-  MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
 import {
   Address,
   ApplicantCase,
@@ -26,6 +21,7 @@ import {
 
 import { projectServices } from '../../services/records.services';
 import { firstNameValidator, middleNameValidator, lastNameValidator, emailValidator} from 'src/app/validators.editperson';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-edit-form-person',
@@ -38,18 +34,18 @@ export class EditFormPersonComponent implements OnInit {
   id!: string;
   responseData!: BuyerAbstractModel;
   buyerTypeList!: BuyerType;
+  loading = false;
 
   constructor(
-    private service: projectServices,
-    private MatDialogRef: MatDialogRef<EditFormPersonComponent>,
-    private snackBar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: BuyerAbstractModel
+    @Inject(MAT_DIALOG_DATA) public data: BuyerAbstractModel,
+    private service : projectServices,
+    private matDialogRef : MatDialogRef<EditFormPersonComponent>,
+    private notificationService: NotificationService
   ) {
     this.responseData = data;
     console.log('Response Data', this.responseData);
     this.id = this.responseData.id;
     this.buyerTypeList = this.responseData.buyerType;
-    ;
   }
 
   editForm = new FormGroup({
@@ -80,25 +76,29 @@ export class EditFormPersonComponent implements OnInit {
   }
 
   setvalues() {
-    const data = this.responseData;
-    this.editForm.setValue({
-      firstName: data.buyer.person.firstName,
-      middleName: data.buyer.person.middleName,
-      lastName: data.buyer.person.lastName,
-      suffix: data.buyer.person.suffix,
-      street1: data.buyer.person.address.street1,
-      street2: data.buyer.person.address.street2,
-      city: data.buyer.person.address.city,
-      state: data.buyer.person.address.state,
-      country: data.buyer.person.address.country,
-      zipCode: data.buyer.person.address.zipCode,
-      email: data.buyer.email,
-      phone: data.buyer.phone,
-      buyerType: data.buyerType as any,
-      isMilitary: data.buyer.person.isMilitary,
-      isRenewalRecipient: data.buyer.person.isRenewalRecipient,
-      sendRenewalByEmail: data.buyer.person.sendRenewalByEmail,
-    });
+     const data = this.responseData;
+     debugger;
+     this.editForm.setValue({
+       firstName: data.buyer.person.firstName,
+       middleName: data.buyer.person.middleName,
+       lastName: data.buyer.person.lastName,
+       suffix: data.buyer.person.suffix,
+       street1: data.buyer.person.address.street1,
+       street2: data.buyer.person.address.street2,
+       city: data.buyer.person.address.city,
+       state: 'bagmati' ,
+       country: data.buyer.person.address.country,
+       zipCode: data.buyer.person.address.zipCode,
+       email: data.buyer.email,
+       phone: data.buyer.phone,
+       buyerType: 0 as any,
+       isMilitary: data.buyer.person.isMilitary,
+       isRenewalRecipient: data.buyer.person.isRenewalRecipient,
+       sendRenewalByEmail: data.buyer.person.sendRenewalByEmail,
+     });
+     this.loading = false;
+
+     debugger;
   }
 
   map() {
@@ -112,7 +112,7 @@ export class EditFormPersonComponent implements OnInit {
       zipCode: this.editForm.value.zipCode as string,
     };
     const person: Person = {
-      firstName: this.editForm.value.firstName as string,
+      firstName: this.editForm.value.firstName as string | any,
       middleName: this.editForm.value.middleName as string,
       lastName: this.editForm.value.lastName as string,
       suffix: this.editForm.value.suffix as string,
@@ -153,43 +153,31 @@ export class EditFormPersonComponent implements OnInit {
       buyerType: parseInt(this.buyerTypeList as any),
       buyer: buyer,
       retailVehicle: rv,
+      soldFinance: this.responseData.soldFinance
     };
     
     return updatedBuyer;
   }
 
-  async editBuyer() {
+    async editBuyer() {
+    this.loading = true;
     const data = this.editForm.value;
-    const updatedData = this.map();
-    if (this.editForm) {
-      try {
-        const resp = await this.service.editBuyer(this.id, updatedData);
-        
-        if (resp.id) {
-          let config: MatSnackBarConfig = {
-            duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-          };
-          let simpleSnackBarRef = this.snackBar.open(
-            'Data updated successfully!!!',
-            '',
-            config
-          );
-          setTimeout(simpleSnackBarRef.dismiss.bind(simpleSnackBarRef), 3000);
-          this.MatDialogRef.close('true');
-        } else {
-          alert('data not updated');
-        }
-      } catch (error) {
-        alert('error');
+    const updatedSales = this.map();
+     if (this.editForm) {
+       try {
+         const resp = await this.service.editBuyer(this.id, updatedSales);
+         if (resp.id) {
+          this.notificationService.success("Uploaded Successfully!!!");
+          this.matDialogRef.close('true');  
       }
-    } else {
-    }
-  }
+         else {
+           alert('data not updated');
+         }
+       } catch (error) {
+         alert('error');
+       }
+     }
 
-  get edit()
-  {
-      return this.editForm.controls;
   }
 }
+

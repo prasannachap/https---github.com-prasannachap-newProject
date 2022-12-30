@@ -1,6 +1,6 @@
 <mat-toolbar class="toolbar">
     <h1 class="add">Edit Form</h1>
-    <mat-icon class="close" [mat-dialog-close]="true" ng-hover class="closeIcon">close</mat-icon>
+    <mat-icon class="close" [mat-dialog-close]="true" ng-hover >close</mat-icon>
 </mat-toolbar>
 
 <ng-container [formGroup]="form">
@@ -10,4 +10,5 @@
 
 <mat-toolbar class="toolbarNav">
     <button mat-raised-button color="primary" (click)="editVehicle()">Submit</button>
+    <mat-spinner *ngIf="showLoader" class="loading"></mat-spinner>
 </mat-toolbar>

@@ -20,7 +20,7 @@ export class projectServices {
   deleteBuyer = async (id: string): Promise<boolean> => {
     try {
       const response = await this.httpClient
-        .delete<any>(GET_ALL_USERS_URL + '/' + id)
+        .delete<BuyerAbstractModel>(GET_ALL_USERS_URL + '/' + id)
         .toPromise();
       return true;
     } catch {

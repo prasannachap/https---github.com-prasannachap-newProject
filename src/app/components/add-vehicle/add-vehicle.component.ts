@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { BuyerAbstractModel, RetailVehicle } from 'src/app/models/buyer.model';
+import { NotificationService } from 'src/app/services/notification.service';
 import { projectServices } from 'src/app/services/records.services';
 
 @Component({
@@ -16,11 +17,13 @@ export class AddVehicleComponent implements OnInit {
   vehicleData!: BuyerAbstractModel;
   res!: RetailVehicle;
   form!: FormGroup;
+  showLoader= false;
 
   constructor(
     private MatDialogRef: MatDialogRef<AddVehicleComponent>,
     private formbuilder: FormBuilder,
     private services: projectServices,
+    private notificationService: NotificationService,
     private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: BuyerAbstractModel
   ) {
@@ -44,6 +47,7 @@ export class AddVehicleComponent implements OnInit {
       majorColorCode: ['', Validators.required],
       minorColor: ['', Validators.required],
       minorColorCode: ['', Validators.required],
+      grossWeight: [0, Validators.required]
     });
   }
 
@@ -77,7 +81,7 @@ export class AddVehicleComponent implements OnInit {
       minorColorCode: res.addVehicleForm.minorColorCode as string,
       minorColor: res.addVehicleForm.minorColor as string,
       emptyWeight: '',
-      grossWeight: '',
+      grossWeight: res.addVehicleForm.grossWeight,
     };
     const updatedBuyer: BuyerAbstractModel = {
       id: this.id,
@@ -85,6 +89,7 @@ export class AddVehicleComponent implements OnInit {
       buyerType: this.vehicleData.buyerType,
       buyer: this.vehicleData.buyer,
       retailVehicle: rv,
+      soldFinance: this.vehicleData.soldFinance
     };
     debugger;
     return updatedBuyer;
@@ -92,21 +97,14 @@ export class AddVehicleComponent implements OnInit {
 
   async addVehicle() {
     const vehicle = this.map();
+    debugger;
     try {
+      this.showLoader=true;
       const resp = await this.services.addVehicle(vehicle);
       debugger;
       if (resp.id) {
-        let config: MatSnackBarConfig = {
-          duration: 3000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top',
-        };
-        let simpleSnackBarRef = this.snackBar.open(
-          'Data Added successfully!!!',
-          '',
-          config
-        );
-        setTimeout(simpleSnackBarRef.dismiss.bind(simpleSnackBarRef), 3000);
+      this.notificationService.success('Vehicle Added SUccessfully')
+      this.showLoader=false;
         this.MatDialogRef.close('true');
       } else {
         alert('data not Added');

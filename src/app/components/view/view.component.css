@@ -17,9 +17,10 @@
 
 }
 .name{
-    font-size:18px;
+    font-size:16px;
      margin: 0 0 0px !important;
      padding: 0px !important;
+     color: black;
      
 }
 .person{
@@ -57,13 +58,48 @@ mat-toolbar{
     align-items: center;
 }
 
-
+.tradeIn{
+    display: flex;
+    align-items: inherit;
+    flex-direction: row;
+}
 .example-spacer {
     flex: 1 1 auto;
   }
-  .error_outline{
-    transform: scale(1.5) 
- }
+  
+ 
  mat-icon{
     font-size: 15px;
  }
+
+
+ .sales{
+    display: flex;
+    flex-direction: column;
+   
+    padding: 0px !important;
+    color: gray;
+
+ }
+
+
+ .spaceBetween{
+    margin: 15px;
+ }
+ 
+ .spaceBetween1{
+    margin-left: 40px;
+ }
+
+ .loading{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+ }              

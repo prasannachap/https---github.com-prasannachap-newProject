@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditVehicleComponent } from '../edit-vehicle/edit-vehicle.component';
 import { BuyerAbstractModel } from '../../models/buyer.model';
 import { AddVehicleComponent } from '../add-vehicle/add-vehicle.component';
-import { FormVehicleComponent } from 'src/app/shared/form-vehicle/form-vehicle.component';
+import { EditSalesComponent } from '../edit-sales/edit-sales.component';
 
 @Component({
   selector: 'app-view',
@@ -20,7 +20,10 @@ import { FormVehicleComponent } from 'src/app/shared/form-vehicle/form-vehicle.c
   export class ViewComponent implements OnInit {
   id !: string;
   subscription: any;
-  buyer! : BuyerAbstractModel | any ;
+  buyer! : BuyerAbstractModel  ;
+  salePriceLessRebate!: number;
+  dealerAndManufactureRebate!: number;
+  loading= false;
 
   
   constructor(
@@ -29,19 +32,24 @@ import { FormVehicleComponent } from 'src/app/shared/form-vehicle/form-vehicle.c
     public dialog: MatDialog
   ){
     this.id = this.route.snapshot.params['id'];
+    debugger;
 
 
   }
   ngOnInit(): void {
+    this.loading =true;
     this.getBuyerById()
+    debugger;
   }
 
  async getBuyerById(){
 
   this.buyer = await this.services.getBuyerById(this.id);
- 
+  this.loading = false;
+  debugger;
   
-
+  this.salePriceLessRebate = this.buyer.soldFinance.finalFinancingAmounts.purchasePrice -( this.buyer.soldFinance.finalFinancingAmounts.dealerRebate  + this.buyer.soldFinance.finalFinancingAmounts.manufacturerRebate)
+  this.dealerAndManufactureRebate = this.buyer.soldFinance.finalFinancingAmounts.dealerRebate  + this.buyer.soldFinance.finalFinancingAmounts.manufacturerRebate
   }
   
   openDialogPerson(id: string){
@@ -74,6 +82,19 @@ import { FormVehicleComponent } from 'src/app/shared/form-vehicle/form-vehicle.c
 
   AddVehicle(id: string){
     const dialogRef = this.dialog.open(AddVehicleComponent, {
+      width: '1200px', 
+      data: this.buyer
+    });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if(result){
+          this.getBuyerById();
+        }
+      });
+  }
+
+  openDialogSales(id: string){
+    const dialogRef = this.dialog.open(EditSalesComponent , {
       width: '1200px', 
       data: this.buyer
     });

@@ -1,0 +1,18 @@
+ .snackBar{
+    height: 20px;
+
+}
+mat-mdc-snack-bar-label ng-tns-c280-20 mdc-snackbar__label{
+    background-color: aqua;
+}
+
+
+/* .message {
+    display: flex;
+    align-self: center;
+    font-size: 50px;
+} */
+
+
+
+ 

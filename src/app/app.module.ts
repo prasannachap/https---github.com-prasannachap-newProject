@@ -14,6 +14,12 @@ import { EditFormPersonComponent } from './components/edit-form-person/edit-form
 import { EditVehicleComponent } from './components/edit-vehicle/edit-vehicle.component';
 import { FormVehicleComponent } from './shared/form-vehicle/form-vehicle.component';
 import { AddVehicleComponent } from './components/add-vehicle/add-vehicle.component';
+import { EditSalesComponent } from './components/edit-sales/edit-sales.component';
+import { AlertMessageComponent } from './components/alert-message/alert-message.component';
+import { NotificationService } from './services/notification.service';
+import { SearchPipe } from './search.pipe';
+import { AddUserComponent } from './components/add-user/add-user.component';
+import { projectServices } from './services/records.services';
 
 
 
@@ -26,7 +32,7 @@ import { AddVehicleComponent } from './components/add-vehicle/add-vehicle.compon
     EditFormPersonComponent,
     EditVehicleComponent,
     FormVehicleComponent, 
-    AddVehicleComponent
+    AddVehicleComponent, EditSalesComponent, AlertMessageComponent, SearchPipe, AddUserComponent
   
   ],
   imports: [
@@ -39,7 +45,7 @@ import { AddVehicleComponent } from './components/add-vehicle/add-vehicle.compon
     ReactiveFormsModule,
     MatDialogModule,    
   ],
-  providers: [],
+  providers: [NotificationService,projectServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

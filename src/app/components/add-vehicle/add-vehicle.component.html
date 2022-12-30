@@ -10,4 +10,5 @@
 
 <mat-toolbar class="toolbarNav">
     <button mat-raised-button color="primary" (click)="addVehicle()">Submit</button>
+    <mat-spinner *ngIf="showLoader" class="loading"></mat-spinner>
 </mat-toolbar>

@@ -11,6 +11,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-edit-vehicle',
@@ -21,23 +22,23 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 export class EditVehicleComponent implements OnInit {
   id!: string;
   vehicleData!: BuyerAbstractModel;
-  res!: RetailVehicle;
   form!: FormGroup;
+  showLoader = false;
 
   constructor(
     private formbuilder: FormBuilder,
     private services: projectServices,
     private MatDialogRef: MatDialogRef <EditVehicleComponent>,
-    private snackBar : MatSnackBar,
+    private notificationService: NotificationService,
     @Inject(MAT_DIALOG_DATA) public data: BuyerAbstractModel ,
     
   ) {
     this.vehicleData = data;
-    debugger;
     this.id = this.vehicleData.id;
   }
 
   vehicleForm(): FormGroup {
+    
     return this.formbuilder.group({
     vin: [this.data.retailVehicle.vin, Validators.required],
     bodyStyle: [this.data.retailVehicle.bodyStyle, Validators.required],
@@ -53,6 +54,7 @@ export class EditVehicleComponent implements OnInit {
     majorColorCode: [this.data.retailVehicle.majorColorCode, Validators.required],
     minorColor: [this.data.retailVehicle.minorColor, Validators.required],
     minorColorCode: [this.data.retailVehicle.minorColorCode, Validators.required],
+    grossWeight: [this.data.retailVehicle.grossWeight, Validators.required]
     })
   };
 
@@ -63,26 +65,26 @@ export class EditVehicleComponent implements OnInit {
   }
 
   map() {
-    const res = this.vehicleForm();
+    const res = this.form.value;
     debugger
 
     const rv: RetailVehicle = {
-      vin: res.value.vin as string,
-      stockNumber:res.value.stockNumber as string,
-      modelYear:res.value.modelYear as string,
-      makeCode:res.value.makeCode as string,
-      make:res.value.make as string,
-      modelCode:res.value.modelCode as string,
-      model:res.value.model as string,
-      bodyStyleCode:res.value.bodyStyleCode as string,
-      bodyStyle:res.value.bodyStyle as string,
-      carryingCapacity:res.value.carryingCapacity as string,
-      majorColorCode:res.value.majorColorCode as string,
-      majorColor:res.value.majorColor as string,
-      minorColorCode:res.value.minorColorCode as string,
-      minorColor:res.value.minorColor as string,
+      vin: res.vehicleForm.vin as string,
+      stockNumber: res.vehicleForm.stockNumber as string,
+      modelYear: res.vehicleForm.modelYear as string,
+      makeCode: res.vehicleForm.makeCode as string,
+      make: res.vehicleForm.make as string,
+      modelCode: res.vehicleForm.modelCode as string,
+      model: res.vehicleForm.model as string,
+      bodyStyleCode: res.vehicleForm.bodyStyleCode as string,
+      bodyStyle: res.vehicleForm.bodyStyle as string,
+      carryingCapacity: res.vehicleForm.carryingCapacity as string,
+      majorColorCode: res.vehicleForm.majorColorCode as string,
+      majorColor: res.vehicleForm.majorColor as string,
+      minorColorCode: res.vehicleForm.minorColorCode as string,
+      minorColor: res.vehicleForm.minorColor as string,
       emptyWeight: '',
-      grossWeight: '',
+      grossWeight: res.vehicleForm.grossWeight as number,
     };
     debugger;
     const updatedBuyer: BuyerAbstractModel = {
@@ -91,6 +93,7 @@ export class EditVehicleComponent implements OnInit {
       buyerType: this.vehicleData.buyerType,
       buyer: this.vehicleData.buyer,
       retailVehicle: rv,
+      soldFinance: this.vehicleData.soldFinance
     };
     return updatedBuyer;
   }
@@ -100,25 +103,15 @@ export class EditVehicleComponent implements OnInit {
   }
 
   async editVehicle() {
-    const data = this.res;
-    debugger;
+    this.showLoader =true;
     const updatedData = this.map();
-    if (this.res) {
+    debugger;
+    if (updatedData) {
       try {
         const resp = await this.services.editBuyer(this.id, updatedData);
-        debugger;
         if (resp.id) {
-          let config: MatSnackBarConfig = {
-            duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-          };
-          let simpleSnackBarRef = this.snackBar.open(
-          'Data updated successfully!!!',
-            '',
-            config
-          );
-          setTimeout(simpleSnackBarRef.dismiss.bind(simpleSnackBarRef), 3000);
+          this.notificationService.success('Vehicle Edited Sucessfully')
+          this.showLoader = false;
           this.MatDialogRef.close('true');
         } 
         else {
@@ -127,8 +120,6 @@ export class EditVehicleComponent implements OnInit {
       } catch (error) {
         alert('error');
       }
-    } else {
-    }
+    } 
   }
 }
-  

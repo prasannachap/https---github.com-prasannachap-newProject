@@ -15,7 +15,6 @@ export class FormVehicleComponent {
   constructor(private rootFormGroup: FormGroupDirective){}
 
   ngOnInit(): void {
-    debugger;
     this.vehicleForm = this.rootFormGroup.control.get(this.formGroupName) as FormGroup;
   }
 }

@@ -1,0 +1,74 @@
+<mat-toolbar class="toolbar">
+    <h1 class="add">Edit Sales Form</h1>
+    <mat-icon class="close" [mat-dialog-close]="true" ng-hover class="close">close</mat-icon>
+</mat-toolbar>
+
+
+<form class="form" [formGroup]="editSales">
+    <div class="personName" >
+        <h3 style="padding: 10px;">Sales Tax Date</h3>
+        <mat-form-field appearance="outline" class="inputStyle">
+            <input matInput formControlName="salesTaxDate">
+          </mat-form-field>
+          
+    </div>
+    
+    <div class="personName" style="padding: 5px;">
+        <h3 style="padding: 10px;">Sales price</h3>
+        <mat-form-field appearance="outline" class="inputStyle">
+            <input matInput formControlName="salesPrice" (change)="onkeyUp($event)">
+            <mat-icon matSuffix> monetization_on</mat-icon>
+          </mat-form-field>
+    </div>
+    <div class="personName">
+        <h3 style="padding: 10px;">Manufacturer Rebate</h3>
+         <mat-form-field class="inputStyle" appearance="outline">
+            <input matInput type ='number' formControlName="manufacturerRebate" (change)="onTotalRebateKeyUp($event)">            
+            <mat-icon matSuffix> monetization_on</mat-icon>
+ 
+        </mat-form-field>
+    </div>
+    <div class="personName">
+        <h3 style="padding: 10px;">Sales Price Less Rebate</h3>
+         <div class="inputStyle" style="align-self: center; display: flex; ">
+            <p>{{salesRebate}}({{totalRebate}} Rebate) </p>
+         </div>
+    </div>
+    <div class="personName">
+        <h3 style="padding: 10px;">Trade in Allowance</h3>
+         <mat-form-field class="inputStyle" appearance="outline">
+            <input matInput formControlName="totalTradeInAllowance" >            
+            <mat-icon matSuffix> monetization_on</mat-icon>
+        </mat-form-field>
+    </div>
+    <div class="personName">
+        <h3 style="padding: 10px;">Taxable Amount</h3>
+         <div class="inputStyle" style="display: flex; align-self: center;"><p>{{taxableAmount}}</p>
+         </div>
+    </div>
+
+    <div class="personName">
+        <h3 style="padding: 10px;">Sales Tax</h3>
+        <div class="inputStyle" style="align-items: center; display: flex;">
+            <p>{{salesTax}}</p>
+         </div>
+    </div>
+    <div class="personName">
+        <h3 style="padding: 10px;">Sales Tax Category</h3>
+         <mat-select class="inputStyle">
+            <input matInput formControlName="salesTaxCategory" > 
+        </mat-select>
+    </div>
+    <div class="personName">
+        <h3 style="padding: 10px;">Progressing County</h3>
+         <mat-select class="inputStyle">
+            <input matInput formControlName="progressingCounty" > 
+        </mat-select>
+    </div>
+</form>
+ <mat-toolbar class="toolbarNav">
+    <button mat-raised-button color="primary" (click)="editSalesAndTax()">Submit</button>
+    <mat-spinner *ngIf="showLoader" class="loading"></mat-spinner>
+
+    
+</mat-toolbar>

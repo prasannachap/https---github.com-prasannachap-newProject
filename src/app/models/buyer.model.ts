@@ -4,6 +4,7 @@ export interface BuyerAbstractModel {
   buyerType: BuyerType;
   buyer: Buyer;
   retailVehicle: RetailVehicle;
+  soldFinance: SoldFinance;
 }
 
 // BUYERS START
@@ -15,6 +16,65 @@ export enum ApplicantCase {
   ORGANIZATION,
   PERSON,
 }
+
+export interface SoldFinance{
+  finalFinancingAmounts : FinalFinancingAmount,
+  lesser: null,
+  lienHolders: LienHolders[],
+  salesOrderNumber: number,
+  type: Type,
+  tradeIn: null
+}
+
+export interface FinalFinancingAmount{
+dealerRebate: number,
+fairMarketValue: number,
+fees: Fees,
+grossPurchasePrice: number,
+latePenaltyPercentage: number,
+manufacturerRebate: number,
+purchasePrice:number,
+salesTaxCategory: null,
+salesTaxDate:string,
+salesTaxExemptionReason: null,
+taxId: string,
+totalTradeInAllowance: number,
+tradeInSalesTaxCreditAmount: number
+}
+
+export interface Fees {
+county: number,
+dieselVehicleEmissionsFee: number,
+eTag: number,
+inspectionFee: number,
+message: string,
+missingProperties: null,
+plateAndSticker: number,
+processingAndHandling: number,
+processingCountyCode: string,
+processingCountyName: string
+salesTax: number,
+titleApplication: number,
+totalFees: number,
+totalFeesAndTax: number,
+}
+
+export interface LienHolders{
+    id: string;
+    date: Date;
+    organization: {
+      name: string;
+      fein: string;
+      address: string;
+    }
+  
+}
+
+export enum Type{
+  Lease,
+  Cash
+}
+  
 
 export interface Buyer {
   organization: string;
@@ -41,7 +101,6 @@ export interface Address {
   state: string;
   country: string;
   zipCode: string;
-  
 }
 //BUYERS END
 // VEHICLE
@@ -58,9 +117,10 @@ export interface RetailVehicle {
   bodyStyle: string;
   carryingCapacity: string;
   emptyWeight: string;
-  grossWeight: string;
+  grossWeight: number;
   majorColorCode: string;
   majorColor: string;
   minorColorCode: string;
   minorColor: string;
 }
+

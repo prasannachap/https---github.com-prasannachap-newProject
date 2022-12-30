@@ -1,0 +1,168 @@
+<br>    
+    <mat-card style="width: 1200px;">
+            <mat-toolbar style="padding: 0px !important;">
+            <mat-icon>account_circle</mat-icon> Buyer
+            </mat-toolbar>
+            <form [formGroup]="createdAt">
+            <mat-form-field appearance="fill" class="email" style="padding: 11px;">
+                <mat-label>Created At</mat-label>
+                <input matInput formControlName="createdAt" type="date"  required="string">
+            </mat-form-field>
+            </form>
+            <form [formGroup]="editForm" class="form">
+                <div class="personName">
+                    <mat-form-field appearance="fill"  class="buyersType">
+                        <mat-label>Buyers type</mat-label>
+                        <mat-select formControlName="buyerType">
+                        <!-- <mat-option value={{BuyerType.PERSON}}>PERSON</mat-option> -->
+                        <!-- <mat-option value={{BuyerType.ORGANIZATION}}>ORGANIZATION</mat-option> -->
+                        </mat-select>
+                    </mat-form-field>
+                    
+            </div>
+            
+            <p class="spaceBetween"></p>
+        <div class="personName">
+            <mat-form-field appearance="fill" class="inputstyle">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName">
+            </mat-form-field><p class="spaceBetween"></p>
+            <mat-form-field appearance="fill" class="inputstyle">
+                <mat-label>Middle Name</mat-label>
+                <input matInput formControlName="middleName" required="string">
+            </mat-form-field><p class="spaceBetween"></p>
+            <mat-form-field appearance="fill" class="inputstyle">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName" required="string">
+            </mat-form-field><p class="spaceBetween"></p>
+            <mat-form-field appearance="fill" class="inputstyle">
+                <mat-label>Suffix</mat-label>
+                <input matInput formControlName="suffix" required="string">
+            </mat-form-field>
+        
+        </div>
+        <p class="spaceBetween"></p>
+            <mat-form-field appearance="fill" class="inputstyle">
+                <mat-label>Street 1</mat-label>
+                <input matInput formControlName="street1" required>
+            </mat-form-field>
+            <p class="spaceBetween"></p>
+        
+            <mat-form-field appearance="fill" class="inputstyle">
+                <mat-label>Street2</mat-label>
+                <input matInput formControlName="street2" required>
+            </mat-form-field>
+            <p class="spaceBetween"></p>
+            
+        
+            <div class="personName">
+                <mat-form-field appearance="fill" class="inputstyle">
+                    <mat-label>City</mat-label>
+                    <input matInput formControlName="city" required="string">
+                </mat-form-field><p class="spaceBetween"></p>
+                <mat-form-field appearance="fill" class="inputstyle">
+                    <mat-label>State</mat-label>
+                    <input matInput formControlName="state" required="string">
+                </mat-form-field><p class="spaceBetween"></p>
+                <mat-form-field appearance="fill" class="inputstyle">
+                    <mat-label>Country</mat-label>
+                    <input matInput formControlName="country" required="string">
+                </mat-form-field><p class="spaceBetween"></p>
+                
+            </div>
+            <p class="spaceBetween"></p>
+            <mat-form-field appearance="fill" class="inputstyle" class="buyersType">
+                <mat-label>Zip/postal Code</mat-label>
+                <input matInput formControlName="zipCode" required="string">
+            </mat-form-field><p class="spaceBetween"></p>
+        
+        
+            <div class="phone">
+                <mat-form-field appearance="fill" class="buyersType">
+                    <mat-label>Phone Number</mat-label>
+                    <input type="text" matInput formControlName="phone">
+                </mat-form-field>
+        
+        
+                <mat-form-field appearance="fill" class="email">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="email" required>
+                </mat-form-field>
+                <span style="color: red;"></span>
+        </div>
+        <p class="spaceBetween"></p>
+        <div class="personName">
+            <mat-checkbox formControlName="isMilitary"> Is military</mat-checkbox>
+            <mat-checkbox formControlName="isRenewalRecipient"> Is Renewal Recipient?</mat-checkbox>
+            <mat-checkbox formControlName="sendRenewalByEmail"> Send Renewal By Email?</mat-checkbox>
+        </div> 
+        </form>
+    </mat-card>
+    <mat-card style="width: 1200px;">
+        <mat-toolbar style="padding: 0px !important;">
+            <mat-icon style="font-size: 25px;">directions_car</mat-icon> Vehicle
+        </mat-toolbar>
+        <ng-container [formGroup]="form">
+            <app-form-vehicle formGroupName="addVehicleForm"></app-form-vehicle>
+        </ng-container>
+    </mat-card>
+    <mat-card style="width: 1200px;">
+        <mat-toolbar style="padding: 0px !important;">
+            <mat-icon style="font-size: 25px;">attach_money</mat-icon> Sales And Taxes
+        </mat-toolbar>
+        <form class="form" [formGroup]="salesForm">
+            <div class="personName" >
+                <h3 style="padding: 10px;">Sales Tax Date</h3>
+                <mat-form-field appearance="outline" class="inputStyle">
+                    <input matInput formControlName="salesTaxDate" type="">
+                  </mat-form-field>
+                  
+            </div>
+            <div class="personName">
+                <h3 style="padding: 10px;">Sales Price</h3>
+                 <mat-form-field appearance="outline" class="inputStyle">
+                    <input matInput formControlName="salesPrice" type="number"> 
+                </mat-form-field >
+            </div>
+            <div class="personName">
+                <h3 style="padding: 10px;">Sales Price Less Rebate</h3>
+                 <div class="inputStyle" style="align-self: center; display: flex; ">
+                    <p>{{salesRebate}}({{totalRebate}} Rebate) </p>
+                 </div>
+            </div>
+            <div class="personName">
+                <h3 style="padding: 10px;">Trade in Allowance</h3>
+                 <mat-form-field class="inputStyle" appearance="outline">
+                    <input matInput formControlName="totalTradeInAllowance" >            
+                    <mat-icon matSuffix> monetization_on</mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="personName">
+                <h3 style="padding: 10px;">Taxable Amount</h3>
+                 <div class="inputStyle" style="display: flex; align-self: center;"><p>{{taxableAmount}}</p>
+                 </div>
+            </div>
+        
+            <div class="personName">
+                <h3 style="padding: 10px;">Sales Tax</h3>
+                <div class="inputStyle" style="align-items: center; display: flex;">
+                    <p>{{salesTax}}</p>
+                 </div>
+            </div>
+            <div class="personName">
+                <h3 style="padding: 10px;">Sales Tax Category</h3>
+                 <mat-select class="inputStyle">
+                    <input matInput formControlName="salesTaxCategory" > 
+                </mat-select>
+            </div>
+            <div class="personName">
+                <h3 style="padding: 10px;">Progressing County</h3>
+                 <mat-select class="inputStyle">
+                    <input matInput formControlName="progressingCounty" > 
+                </mat-select>
+            </div>
+        </form>
+
+        <button mat-flat-button color="primary" (click)="map()">Add</button>
+
+    </mat-card>
